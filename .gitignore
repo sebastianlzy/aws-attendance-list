@@ -1,0 +1,4 @@
+*.tsv
+node_modules
+.idea
+data
