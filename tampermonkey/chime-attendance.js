@@ -10,12 +10,18 @@
 (function () {
     "use strict";
 
-    let date = new Date();
-    addSaveButtonToMenu();
+
     const oneSecond = 1000;
     const fiveSeconds = 5 * oneSecond;
     const oneMinute = 60 * oneSecond;
     const fiveMinutes = 5 * oneMinute;
+
+    const desiredTimeInterval = fiveMinutes // Set to desired interval
+
+    // ----------------- Do not edit below -------------------
+
+    let date = new Date();
+    addSaveButtonToMenu();
 
     var timer = setInterval(function () {
         date = new Date()
@@ -25,7 +31,7 @@
             // clearInterval(timer);
             scrapeChime()
         }
-    }, fiveMinutes);
+    }, desiredTimeInterval);
 
 
 
