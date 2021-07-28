@@ -49,29 +49,37 @@ function readFiles(dirname) {
 
 const attendanceList = []
 const uniqueName = {}
-const attendanceListFilePath = "/Users/leesebas/Downloads" //Change file path
+const attendanceListFilePath = "/Users/leesebas/workplace/aws-attendance-list/data" //Change file path
 
-const processNames = (names, date) => {
-
+const processAttendees = (attendees, date) => {
+    console.log("--------------------index.js-processNames-55-attendees----------------------------")
+    console.log(attendees)
+    console.log("--------------------index.js-processNames-55-attendees---------------------------")
     const processedName = (name) => name
             .replace('‹', '')
             .replace('›', '')
 
     const convertDateTimeToLocal = (date) => {
-        return moment(date).format()
+        return moment(date).format("YYYY-MM-DD HH:mm:ss")
     }
 
-    names.forEach((name) => {
-        const pname = processedName(name)
+    attendees.forEach((attendee) => {
+        console.log("--------------------index.js--67-attendee----------------------------")
+        console.log(attendee)
+        console.log("--------------------index.js--67-attendee---------------------------")
+        const pname = processedName(attendee.name)
+        if (attendee.status !== 'present') {
+            return
+        }
         uniqueName[`${pname}`] = true
-        attendanceList.push(`${pname}\t ${convertDateTimeToLocal(date)}`)
+        attendanceList.push(`${pname}\t${convertDateTimeToLocal(date)}`)
     })
 
 }
 
 const writeFiles = (data, filename) => {
 
-    fs.writeFile(`./${filename}`, data.join('\n'), function (err) {
+    fs.writeFile(`./output/${filename}`, data.join('\n'), function (err) {
         if (err) throw err;
         console.log('Saved!');
     });
@@ -81,13 +89,14 @@ const writeFiles = (data, filename) => {
 
 readFiles(  attendanceListFilePath)
     .then(files => {
-        console.log(files)
+        // console.log(files)
         files.forEach( (item, index) => {
             const attendance = JSON.parse(item.contents)
-            processNames(attendance.attendees, attendance.date)
+            processAttendees(attendance.attendees, attendance.date)
         });
+        console.log(attendanceList)
         writeFiles(Object.keys(uniqueName), 'attendanceName.tsv')
-        console.log(Object.keys(uniqueName).length)
+        // console.log(Object.keys(uniqueName).length)
         writeFiles(attendanceList, 'attendancefile.tsv')
 
     })
