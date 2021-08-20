@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Chime Meeting Roster for Chime 5.0
-// @namespace    jiawoon
+// @namespace    Sebastian
 // @version      1.0
-// @description  Save Chime snapshot of roster to disk with status; Made for Chime 5.0; Based on "Chime Meeting Roster 3.0" by schuettc
-// @author       jiawoon@
+// @description  Save Chime snapshot of roster to disk with status; Made for Chime 5.0; Based on "Chime Meeting Roster 3.0" by schuettc and modified by jiawoon@
+// @author       leesebas@
 // @match        https://app.chime.aws/*
 // ==/UserScript==
 
@@ -32,8 +32,6 @@
             scrapeChime()
         }
     }, desiredTimeInterval);
-
-
 
     function addSaveButtonToMenu() {
         const meetingTop = document.querySelector(".nav");

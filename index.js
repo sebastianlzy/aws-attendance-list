@@ -52,9 +52,6 @@ const uniqueName = {}
 const attendanceListFilePath = "/Users/leesebas/workplace/aws-attendance-list/data" //Change file path
 
 const processAttendees = (attendees, date) => {
-    console.log("--------------------index.js-processNames-55-attendees----------------------------")
-    console.log(attendees)
-    console.log("--------------------index.js-processNames-55-attendees---------------------------")
     const processedName = (name) => name
             .replace('‹', '')
             .replace('›', '')
@@ -64,9 +61,6 @@ const processAttendees = (attendees, date) => {
     }
 
     attendees.forEach((attendee) => {
-        console.log("--------------------index.js--67-attendee----------------------------")
-        console.log(attendee)
-        console.log("--------------------index.js--67-attendee---------------------------")
         const pname = processedName(attendee.name)
         if (attendee.status !== 'present') {
             return
@@ -91,12 +85,13 @@ readFiles(  attendanceListFilePath)
     .then(files => {
         // console.log(files)
         files.forEach( (item, index) => {
+
             const attendance = JSON.parse(item.contents)
             processAttendees(attendance.attendees, attendance.date)
         });
         console.log(attendanceList)
         writeFiles(Object.keys(uniqueName), 'attendanceName.tsv')
-        // console.log(Object.keys(uniqueName).length)
+        console.log(Object.keys(uniqueName).length)
         writeFiles(attendanceList, 'attendancefile.tsv')
 
     })

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "cp:s3": "aws s3 cp ./output/attendancefile.tsv s3://aws-sagemaker-101-attendance-29-07-2021/output/attendancefile.tsv "
   },
   "keywords": [],
   "author": "",
